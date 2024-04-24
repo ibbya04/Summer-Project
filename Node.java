@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class Node {
 
-    private String data;
+    private String name;
     private ArrayList<Edge> edges;
 
-    public Node(String data) {
-        this.data = data;
+    public Node(String name) {
+        this.name = name;
         this.edges = new ArrayList<Edge>();
     }
 
@@ -15,7 +15,19 @@ public class Node {
     }
 
     public void removeEdge(Node endNode) {
-        if ()
-        this.edges.remove();
+        for (int i = 0; i < this.edges.size(); i++){
+            Edge edge = this.edges.get(i);
+            if (edge.getEnd().equals(endNode))
+                this.edges.remove(i);
+                i--;
+        }
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public ArrayList<Edge> getEdges() {
+        return this.edges;
     }
 }
