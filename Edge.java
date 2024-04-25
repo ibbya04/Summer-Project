@@ -1,23 +1,19 @@
 public class Edge {
     private Node start;
     private Node end;
-    private Integer weight;
 
-    public Edge(Node start, Node end, Integer weight) {
+    public Edge(Node start, Node end) {
         this.start = start;
         this.end = end;
-        this.weight = weight;
     }
 
+    // return where node starts from
     public Node getStart() {
         return this.start;
     }
 
+    // return where node ends
     public Node getEnd() {
         return this.end;
-    }
-
-    public Integer getWeight() {
-        return this.weight;
     }
 }
