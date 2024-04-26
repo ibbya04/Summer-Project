@@ -22,9 +22,10 @@ public class Node {
     public void removeEdge(Node endNode) {
         for (int i = 0; i < this.edges.size(); i++){
             Edge edge = this.edges.get(i);
-            if (edge.getEnd().equals(endNode))
+            if (edge.getEnd().equals(endNode)) {
                 this.edges.remove(i);
                 i--;
+            }
         }
     }
     // returns node's name 
@@ -37,7 +38,7 @@ public class Node {
     }
 
     // prints all of a single nodes edges
-    public void print() {
+    public void printNodes() {
 		String message = "";
 		
         // if node has no edges

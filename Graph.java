@@ -30,10 +30,11 @@ public class Graph {
         return this.nodes;
     }
 
-    // iterates over all graphs nodes, assinging each node to n and calling print function on each node
-    public void print() {
-        for(Node n: this.nodes) {
-            n.print();
+    // iterates over all graphs nodes, assinging each node to n and calling print
+    // function on each node
+    public void printGraph() {
+        for (Node n : this.nodes) {
+            n.printNodes();
         }
     }
 
@@ -46,12 +47,12 @@ public class Graph {
 
         socialNetwork.addEdge(Ibraheem, Ibby);
         socialNetwork.addEdge(Ibraheem, IA);
-        socialNetwork.print();
+        socialNetwork.printGraph();
 
         socialNetwork.removeEdge(Ibraheem, IA);
-        socialNetwork.print();
+        socialNetwork.printGraph();
 
         socialNetwork.removeNode(Ibby);
-        socialNetwork.print();
+        socialNetwork.printGraph();
     }
 }
