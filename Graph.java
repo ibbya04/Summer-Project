@@ -9,9 +9,13 @@ public class Graph {
     }
 
     public Node addNode(String name) {
-        Node newNode = new Node(name);
-        this.nodes.add(newNode);
-        return newNode;
+        if (findNode(name) == null){
+            Node newNode = new Node(name);
+            this.nodes.add(newNode);
+            return newNode;
+        }
+        else
+            return null;
     }
 
     public void removeNode(Node node) {
@@ -26,8 +30,14 @@ public class Graph {
         startNode.removeEdge(endNode);
     }
 
-    public ArrayList<Node> getNodes() {
-        return this.nodes;
+    public Node findNode(String name) {
+        for (int i = 0; i < this.nodes.size(); i++)
+        {
+            Node node = this.nodes.get(i);
+            if (node.getName() == name)
+                return node;
+        }
+        return null;
     }
 
     // iterates over all graphs nodes, assinging each node to n and calling print
@@ -39,17 +49,17 @@ public class Graph {
     }
 
     //
-    public void createPerson(String[] data) {
+    public void createPerson(String[] names) {
         // for each loop creating a node for every name within data array 
-        for (String person : data)
+        for (String person : names)
             this.addNode(person);
 
-        // for loop iterating through all the people we have just created
-        // start node is always first name on the line of data
+        // for loop iterating through the single row of names we gave it
+        // start node is always first name on the row of data
         // iterates through all other names creating a directed edge between first name and nth name.
-        for (int i = 1; i < this.nodes.size(); i++) {
-            Node startNode = this.nodes.get(0);
-            Node endNode = this.nodes.get(i);
+        for (int i = 1; i < names.length; i++){
+            Node startNode = findNode(names[0]);
+            Node endNode = findNode(names[i]);
             startNode.addEdge(endNode);
         }
     }

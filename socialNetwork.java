@@ -1,12 +1,16 @@
+import java.util.ArrayList;
+
 public class socialNetwork {
 
     private Graph graph;
     private inputReader ir;
+    private ArrayList<String> lines;
 
     // constructor to combine and run all functions
     public socialNetwork() {
         String filePath = "test-socialnetworks/social-network1.txt";
 
+        this.lines = new ArrayList<String>();
         this.createGraph(filePath);
 
         //testing
@@ -19,8 +23,12 @@ public class socialNetwork {
         ir = new inputReader();
         graph = new Graph();
 
-        String[] line = ir.readLine(filePath);
-        graph.createPerson(line);
+        lines = ir.readLine(filePath);
+
+        for (int i = 0; i < lines.size(); i++) {
+            String[] names = ir.formatLine(lines, i);
+            graph.createPerson(names);
+        }
     }
 
     public static void main(String[] args) {
