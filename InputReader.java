@@ -2,7 +2,7 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
-public class InputReader {
+public class inputReader {
 
   // Reads a line of text from a file and converts into an array of strings
   public String[] readLine(String filePath) {
@@ -25,7 +25,7 @@ public class InputReader {
 
   //testing
   public static void main(String[] args) {
-    InputReader ir = new InputReader();
+    inputReader ir = new inputReader();
     String[] names = ir.readLine("test-socialnetworks/social-network1.txt");
   }
 }

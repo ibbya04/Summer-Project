@@ -38,6 +38,22 @@ public class Graph {
         }
     }
 
+    //
+    public void createPerson(String[] data) {
+        // for each loop creating a node for every name within data array 
+        for (String person : data)
+            this.addNode(person);
+
+        // for loop iterating through all the people we have just created
+        // start node is always first name on the line of data
+        // iterates through all other names creating a directed edge between first name and nth name.
+        for (int i = 1; i < this.nodes.size(); i++) {
+            Node startNode = this.nodes.get(0);
+            Node endNode = this.nodes.get(i);
+            startNode.addEdge(endNode);
+        }
+    }
+
     // testing
     public static void main(String[] args) {
         Graph socialNetwork = new Graph();
