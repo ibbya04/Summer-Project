@@ -3,10 +3,11 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 
 public class InputReader {
-  private String filePath;
 
-  public String readLine(String filePath) {
+  // Reads a line of text from a file and converts into an array of strings
+  public String[] readLine(String filePath) {
     String data = null;
+    // if there is another line of text, scanner scans over it and returns it into data variable 
     try {
       Scanner scanner = new Scanner(new File(filePath));
       if (scanner.hasNextLine()) {
@@ -17,7 +18,14 @@ public class InputReader {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-    return data;
+    // splits line of text into an array of strings, each string within array is a name
+    String[] names = data.split(" ");
+    return names;
   }
-  // String[] data = line.split(" ");
+
+  //testing
+  public static void main(String[] args) {
+    InputReader ir = new InputReader();
+    String[] names = ir.readLine("test-socialnetworks/social-network1.txt");
+  }
 }
