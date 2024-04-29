@@ -7,8 +7,7 @@ public class socialNetwork {
     private ArrayList<String> lines;
 
     // constructor to combine and run all functions
-    public socialNetwork() {
-        String filePath = "test-socialnetworks/social-network1.txt";
+    public socialNetwork(String filePath) {
 
         this.lines = new ArrayList<String>();
         this.createGraph(filePath);
@@ -32,6 +31,17 @@ public class socialNetwork {
     }
 
     public static void main(String[] args) {
-        socialNetwork Dapper = new socialNetwork();
+        String filePath = "test-socialnetworks/social-network1.txt";
+
+        if (args.length < 1 || args.length > 1) {
+            usage();
+            return;
+        }
+
+        socialNetwork Dapper = new socialNetwork(filePath);
+    }
+
+    private static void usage() {
+        System.out.println("Usage: java socialNetwork <file.txt>");
     }
 }
