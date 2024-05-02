@@ -26,17 +26,18 @@ public class socialNetwork {
 
         for (int i = 0; i < lines.size(); i++) {
             String[] names = ir.formatLine(lines, i);
-            graph.createPerson(names);
+            graph.createPeople(names);
         }
     }
 
     public static void main(String[] args) {
         String filePath = "test-socialnetworks/social-network1.txt";
 
-        if (args.length < 1 || args.length > 1) {
-            usage();
-            return;
-        }
+        // Check if command line argument has more than one argument
+        // if (args.length != 1) {
+        //     usage();
+        //     return;
+        // }
 
         socialNetwork Dapper = new socialNetwork(filePath);
     }

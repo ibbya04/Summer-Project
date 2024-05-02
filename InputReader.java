@@ -8,8 +8,9 @@ public class inputReader {
   // Reads a line of text from a file and converts into an array of strings
   public ArrayList<String> readLine(String filePath) {
     ArrayList<String> lines = new ArrayList<>();
-    
-    // if there is another line of text, scanner scans over it and returns it into data variable 
+
+    // if there is another line of text, scanner scans over it and returns it into
+    // data variable
     try {
       Scanner scanner = new Scanner(new File(filePath));
       while (scanner.hasNextLine()) {
@@ -24,13 +25,13 @@ public class inputReader {
     return lines;
   }
 
+  // splits line of text into an array of strings, each string within array is a name
   public String[] formatLine(ArrayList<String> data, int i) {
-    // splits line of text into an array of strings, each string within array is a name
     String[] names = data.get(i).split(" ");
     return names;
   }
 
-  //testing
+  // testing
   public static void main(String[] args) {
     inputReader ir = new inputReader();
     ArrayList<String> data = ir.readLine("test-socialnetworks/social-network1.txt");
