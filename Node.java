@@ -4,6 +4,7 @@ public class Node {
 
     private String name;
     private ArrayList<Edge> edges;
+    private int followers;
 
     // constructor
     public Node(String name) {
@@ -40,6 +41,20 @@ public class Node {
     // returns number of edges of this single node
     public int getNodesEdges() {
         return this.edges.size();
+    }
+
+    // iterates through all of this nodes edges, adding one to the endNodes 
+    // follower count - directed edges, endNode is always the person who is followed
+    public void checkEndNode() {
+        for (Edge edge : edges) {
+            Node n = edge.getEnd();
+            n.followers ++;
+        } 
+    }
+
+    // Returns node's (person's) followers
+    public int getFollowers() {
+        return this.followers;
     }
 
     // prints all of a single nodes edges

@@ -6,7 +6,7 @@ public class socialNetwork {
     private inputReader ir;
     private ArrayList<String> lines;
 
-    // constructor to combine and run all functions
+    // constructor to create graph
     public socialNetwork(String filePath) {
 
         this.lines = new ArrayList<String>();
@@ -31,12 +31,18 @@ public class socialNetwork {
     }
 
     // Calcultes density of the social network
-    public float calculateDensity() {
+    public void calculateDensity() {
         float numEdges = graph.getNumEdges();
         float numNodes = graph.getNumNodes();
 
         float density = numEdges / (numNodes*(numNodes-1));
-        return density;
+        System.out.println("Task 1: " + density);
+    }
+
+    // Calls checkNumberofFollowers and prints result
+    public void mostFollowers() {
+        Node mostFollowers = graph.findHighestFollowers();
+        System.out.println("Task 2: " + mostFollowers.getName());
     }
 
     public static void main(String[] args) {
@@ -49,7 +55,8 @@ public class socialNetwork {
         // }
 
         socialNetwork Dapper = new socialNetwork(filePath);
-        System.out.println(Dapper.calculateDensity());
+        Dapper.calculateDensity();
+        Dapper.mostFollowers();
     }
 
     private static void usage() {
