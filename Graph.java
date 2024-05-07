@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Graph {
 
     private ArrayList<Node> nodes;
+    private int numEdges;
 
     public Graph() {
         this.nodes = new ArrayList<Node>();
@@ -75,6 +76,19 @@ public class Graph {
         }
     }
 
+    // Returns number of edges, recursively calling getNodesEdges 
+    // from Node.java for every node in this graph
+    public float getNumEdges() {
+        for (int i = 0; i < this.nodes.size(); i++)
+            numEdges += this.nodes.get(i).getNodesEdges();
+        return numEdges;
+    }
+
+    // Returns number of nodes in this graph
+    public float getNumNodes() {
+        return this.nodes.size();
+    }
+
     // testing
     public static void main(String[] args) {
         Graph socialNetwork = new Graph();
@@ -84,12 +98,11 @@ public class Graph {
 
         socialNetwork.addEdge(Ibraheem, Ibby);
         socialNetwork.addEdge(Ibraheem, IA);
+        socialNetwork.addEdge(IA, Ibby);
         socialNetwork.printGraph();
 
-        socialNetwork.removeEdge(Ibraheem, IA);
-        socialNetwork.printGraph();
+        System.out.println(socialNetwork.getNumEdges());
+        System.out.println(socialNetwork.getNumNodes());
 
-        socialNetwork.removeNode(Ibby);
-        socialNetwork.printGraph();
     }
 }

@@ -30,6 +30,15 @@ public class socialNetwork {
         }
     }
 
+    // Calcultes density of the social network
+    public float calculateDensity() {
+        float numEdges = graph.getNumEdges();
+        float numNodes = graph.getNumNodes();
+
+        float density = numEdges / (numNodes*(numNodes-1));
+        return density;
+    }
+
     public static void main(String[] args) {
         String filePath = "test-socialnetworks/social-network1.txt";
 
@@ -40,6 +49,7 @@ public class socialNetwork {
         // }
 
         socialNetwork Dapper = new socialNetwork(filePath);
+        System.out.println(Dapper.calculateDensity());
     }
 
     private static void usage() {

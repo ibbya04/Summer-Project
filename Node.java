@@ -37,9 +37,9 @@ public class Node {
         return this.name;
     }
 
-    // returns all of node's edges
-    public ArrayList<Edge> getEdges() {
-        return this.edges;
+    // returns number of edges of this single node
+    public int getNodesEdges() {
+        return this.edges.size();
     }
 
     // prints all of a single nodes edges
