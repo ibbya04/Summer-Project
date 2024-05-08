@@ -78,4 +78,15 @@ public class Node {
         }
         System.out.println(message);
     }
+
+    // Returns which name comes alphabetically first, for findHighestFollowers function
+    public Node returnFirstName(Node second) {
+        char a = this.getName().charAt(0);
+        char b = second.getName().charAt(0);
+
+        if (a < b)
+            return this;
+        else
+            return second;
+    }
 }

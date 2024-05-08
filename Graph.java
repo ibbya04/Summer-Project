@@ -107,6 +107,11 @@ public class Graph {
             if (person.getFollowers() > mostFollowers.getFollowers()) {
                 mostFollowers = person;
             }
+
+            // if multiple people with same amount of followers, return first alphabetically
+            else if ( person.getFollowers() == mostFollowers.getFollowers()) {
+                mostFollowers = person.returnFirstName(mostFollowers);
+            }
         }
         return mostFollowers;
     }
