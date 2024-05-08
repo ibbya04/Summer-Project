@@ -45,6 +45,12 @@ public class socialNetwork {
         System.out.println("Task 2: " + mostFollowers.getName());
     }
 
+    // Calls checkNumberofFollowing and prints result
+    public void mostFollowing() {
+        Node mostFollowing = graph.findHighestFollowing();
+        System.out.println("Task 3: " + mostFollowing.getName());
+    }
+
     public static void main(String[] args) {
         String filePath = "test-socialnetworks/social-network1.txt";
 
@@ -57,6 +63,7 @@ public class socialNetwork {
         socialNetwork Dapper = new socialNetwork(filePath);
         Dapper.calculateDensity();
         Dapper.mostFollowers();
+        Dapper.mostFollowing();
     }
 
     private static void usage() {

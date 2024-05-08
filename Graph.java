@@ -116,6 +116,33 @@ public class Graph {
         return mostFollowers;
     }
 
+    // Checks number of people each person follows
+    // Calls checkStartNode on each person using a for each loop, 
+    // updating everyones following count
+    public Node findHighestFollowing() {
+        for (Node person : this.nodes) {
+            person.checkStartNode();
+        }
+
+        // initialises person (node) following most poeple to first node
+        Node mostFollowing = this.nodes.get(0);
+
+        // for each loop iterates through all nodes (all people)
+        // gets number of people each persons follows and if greater than
+        // current person with most following, update Node mostFollowing
+        for (Node person: this.nodes) {
+            if (person.getFollowing() > mostFollowing.getFollowing()) {
+                mostFollowing = person;
+            }
+
+            // if multiple people follow the same amount of people, return first alphabetically
+            else if ( person.getFollowing() == mostFollowing.getFollowing()) {
+                mostFollowing = person.returnFirstName(mostFollowing);
+            }
+        }
+        return mostFollowing;
+    }
+
     // testing
     public static void main(String[] args) {
         Graph socialNetwork = new Graph();

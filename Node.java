@@ -5,6 +5,7 @@ public class Node {
     private String name;
     private ArrayList<Edge> edges;
     private int followers;
+    private int following;
 
     // constructor
     public Node(String name) {
@@ -43,8 +44,22 @@ public class Node {
         return this.edges.size();
     }
 
-    // iterates through all of this nodes edges, adding one to the endNodes 
-    // follower count - directed edges, endNode is always the person who is followed
+    // iterates through all of this nodes edges, adding one to the start nodes 
+    // follower count - directed edges, start node is always the person who is following someone else
+    public void checkStartNode() {
+        for (Edge edge : edges) {
+            Node n = edge.getStart();
+            n.following ++;
+        } 
+    }
+
+    // Returns how many people node(person) is following
+    public int getFollowing() {
+        return this.following;
+    }
+
+    // iterates through all of this nodes edges, adding one to the end nodes 
+    // follower count - directed edges, end node is always the person who is being followed
     public void checkEndNode() {
         for (Edge edge : edges) {
             Node n = edge.getEnd();
@@ -52,7 +67,7 @@ public class Node {
         } 
     }
 
-    // Returns node's (person's) followers
+    // Returns how many people followers node(person) has
     public int getFollowers() {
         return this.followers;
     }
@@ -79,7 +94,7 @@ public class Node {
         System.out.println(message);
     }
 
-    // Returns which name comes alphabetically first, for findHighestFollowers function
+    // Returns which name comes alphabetically first, for findHighestFollowers/Following functions
     public Node returnFirstName(Node second) {
         char a = this.getName().charAt(0);
         char b = second.getName().charAt(0);
