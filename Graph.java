@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Graph {
 
@@ -90,11 +92,11 @@ public class Graph {
     }
 
     // Checks each persons number of followers
-    // Calls checkEndNode on each person using a for each loop, 
+    // Calls checkFollowers on each person using a for each loop, 
     // updating everyones follower count
     public Node findHighestFollowers() {
         for (Node person : this.nodes) {
-            person.checkEndNode();
+            person.checkFollowers();
         }
 
         // initialises person (node) with most followers to first node
@@ -117,11 +119,11 @@ public class Graph {
     }
 
     // Checks number of people each person follows
-    // Calls checkStartNode on each person using a for each loop, 
+    // Calls checkFollowing on each person using a for each loop, 
     // updating everyones following count
     public Node findHighestFollowing() {
         for (Node person : this.nodes) {
-            person.checkStartNode();
+            person.checkFollowing();
         }
 
         // initialises person (node) following most poeple to first node
@@ -143,6 +145,17 @@ public class Graph {
         return mostFollowing;
     }
 
+    public Set<Node> findFollowers() {
+        Node origin = this.nodes.get(0);
+        Set<Node> followers = new HashSet<Node>();
+
+        for (Node person : this.nodes) {
+            if (person.checkIfFollows(origin) == true) {
+                 followers.add(person);
+            }
+        }
+        return followers;
+    }
     // testing
     public static void main(String[] args) {
         Graph socialNetwork = new Graph();
@@ -150,13 +163,13 @@ public class Graph {
         Node Ibby = socialNetwork.addNode("ibby");
         Node IA = socialNetwork.addNode("IA");
 
-        socialNetwork.addEdge(Ibraheem, Ibby);
-        socialNetwork.addEdge(Ibraheem, IA);
+        socialNetwork.addEdge(Ibby, Ibraheem);
+        socialNetwork.addEdge(IA, Ibraheem);
         socialNetwork.addEdge(IA, Ibby);
         socialNetwork.printGraph();
 
-        System.out.println(socialNetwork.getNumEdges());
-        System.out.println(socialNetwork.getNumNodes());
-
+        Set<Node> followers = socialNetwork.findFollowers();
+        System.out.println(followers);
+        
     }
 }

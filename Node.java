@@ -39,39 +39,6 @@ public class Node {
         return this.name;
     }
 
-    // returns number of edges of this single node
-    public int getNodesEdges() {
-        return this.edges.size();
-    }
-
-    // iterates through all of this nodes edges, adding one to the start nodes 
-    // follower count - directed edges, start node is always the person who is following someone else
-    public void checkStartNode() {
-        for (Edge edge : edges) {
-            Node n = edge.getStart();
-            n.following ++;
-        } 
-    }
-
-    // Returns how many people node(person) is following
-    public int getFollowing() {
-        return this.following;
-    }
-
-    // iterates through all of this nodes edges, adding one to the end nodes 
-    // follower count - directed edges, end node is always the person who is being followed
-    public void checkEndNode() {
-        for (Edge edge : edges) {
-            Node n = edge.getEnd();
-            n.followers ++;
-        } 
-    }
-
-    // Returns how many people followers node(person) has
-    public int getFollowers() {
-        return this.followers;
-    }
-
     // prints all of a single nodes edges
     public void printNodes() {
         String message = "";
@@ -94,6 +61,39 @@ public class Node {
         System.out.println(message);
     }
 
+    // returns number of edges of this single node
+    public int getNodesEdges() {
+        return this.edges.size();
+    }
+
+    // iterates through all of this nodes edges, adding one to the start nodes 
+    // follower count - directed edges, start node is always the person who is following someone else
+    public void checkFollowing() {
+        for (Edge edge : edges) {
+            Node n = edge.getStart();
+            n.following ++;
+        } 
+    }
+
+    // Returns how many people node(person) is following
+    public int getFollowing() {
+        return this.following;
+    }
+
+    // iterates through all of this nodes edges, adding one to the end nodes 
+    // follower count - directed edges, end node is always the person who is being followed
+    public void checkFollowers() {
+        for (Edge edge : edges) {
+            Node n = edge.getEnd();
+            n.followers ++;
+        } 
+    }
+
+    // Returns how many people followers node(person) has
+    public int getFollowers() {
+        return this.followers;
+    }
+
     // Returns which name comes alphabetically first, for findHighestFollowers/Following functions
     public Node returnFirstName(Node second) {
         char a = this.getName().charAt(0);
@@ -104,4 +104,14 @@ public class Node {
         else
             return second;
     }
+
+    public Boolean checkIfFollows(Node test) {
+        for (Edge edge : edges) {
+            Node n = edge.getEnd();
+            if (n == test)
+                return true;
+        } 
+        return false; 
+    }
+
 }

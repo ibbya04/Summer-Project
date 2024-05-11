@@ -19,7 +19,7 @@ public class inputReader {
       }
       scanner.close();
     } catch (FileNotFoundException e) {
-      System.out.println("An error occurred.");
+      System.out.println("An error occurred. The file was not found");
       e.printStackTrace();
     }
     return lines;

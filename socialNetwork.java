@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Set;
 
 public class socialNetwork {
 
@@ -50,6 +51,10 @@ public class socialNetwork {
         Node mostFollowing = graph.findHighestFollowing();
         System.out.println("Task 3: " + mostFollowing.getName());
     }
+
+    public void twoDegreeesofSeparation() {
+        Set<Node> followers = 
+        graph.findOriginsFollowers()
 
     public static void main(String[] args) {
         String filePath = "test-socialnetworks/social-network1.txt";
