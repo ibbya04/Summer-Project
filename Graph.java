@@ -145,14 +145,12 @@ public class Graph {
         return mostFollowing;
     }
 
-    public Set<Node> findFollowers() {
-        Node origin = this.nodes.get(0);
+    public Set<Node> findFollowers(Node testPerson) {
         Set<Node> followers = new HashSet<Node>();
 
         for (Node person : this.nodes) {
-            if (person.checkIfFollows(origin) == true) {
+            if (person.checkIfFollows(testPerson) == true)
                  followers.add(person);
-            }
         }
         return followers;
     }
@@ -168,8 +166,6 @@ public class Graph {
         socialNetwork.addEdge(IA, Ibby);
         socialNetwork.printGraph();
 
-        Set<Node> followers = socialNetwork.findFollowers();
-        System.out.println(followers);
-        
+        Set<Node> followers = socialNetwork.findFollowers(Ibraheem);
     }
 }

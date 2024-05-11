@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Set;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 public class socialNetwork {
 
     private Graph graph;
@@ -52,9 +54,29 @@ public class socialNetwork {
         System.out.println("Task 3: " + mostFollowing.getName());
     }
 
+    public Node getFirstPerson() {
+        //ArrayList<String> line = ir.readLine(filePath);
+        String[] firstline = ir.formatLine(lines, 0);
+        Node firstPerson = graph.findNode(firstline[0]);
+        return firstPerson;
+        }
+
     public void twoDegreeesofSeparation() {
-        Set<Node> followers = 
-        graph.findOriginsFollowers()
+        Node firstPerson = getFirstPerson();
+        Set<Node> followers = graph.findFollowers(firstPerson);
+
+        int count = 0;
+        for (Node follower : followers) {
+            Set<Node> followersOfFollowers = null; 
+            followersOfFollowers = graph.findFollowers(follower);
+            
+            for (Node secondfollower : followersOfFollowers) {
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
+        
 
     public static void main(String[] args) {
         String filePath = "test-socialnetworks/social-network1.txt";
@@ -69,6 +91,7 @@ public class socialNetwork {
         Dapper.calculateDensity();
         Dapper.mostFollowers();
         Dapper.mostFollowing();
+        Dapper.twoDegreeesofSeparation();
     }
 
     private static void usage() {
