@@ -1,7 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class socialNetwork {
 
@@ -54,27 +53,42 @@ public class socialNetwork {
         System.out.println("Task 3: " + mostFollowing.getName());
     }
 
+    // Returns the first person who appears in the input
+    // Uses formatLine function from inputReader to get a string array of all the names on the first line
+    // Finds the node of the first person on that line and returns that node. 
     public Node getFirstPerson() {
-        //ArrayList<String> line = ir.readLine(filePath);
         String[] firstline = ir.formatLine(lines, 0);
         Node firstPerson = graph.findNode(firstline[0]);
         return firstPerson;
         }
 
+    // Removes the first person from the set followersOfFollowers
+    // Removes any duplicates which are already followers of the first person.
+    public Set<Node> removeDuplicates(Node firstPerson, Set<Node> followers, Set<Node> followersOfFollowers) {
+        if (followersOfFollowers.contains(firstPerson)) 
+            followersOfFollowers.remove(firstPerson);
+
+        followersOfFollowers.removeAll(followers);
+        return followersOfFollowers;
+    }
+
+    // Returns number of people at two degrees of separation.
+    // Calls getFirstPerson to get the first person from the input.
+    // Both groups of followers are put into Sets, no duplicates, unordered.
+    // The set of followers of the first person is found by calling findFollowers.
+    // Then it iterates through each of these followers adding their followers
+    // to the set followersOfFollowers. Then duplicates are removed.
     public void twoDegreeesofSeparation() {
         Node firstPerson = getFirstPerson();
         Set<Node> followers = graph.findFollowers(firstPerson);
 
-        int count = 0;
-        for (Node follower : followers) {
-            Set<Node> followersOfFollowers = null; 
-            followersOfFollowers = graph.findFollowers(follower);
-            
-            for (Node secondfollower : followersOfFollowers) {
-                count++;
-            }
-        }
-        System.out.println(count);
+        Set<Node> followersOfFollowers = new HashSet<Node>();
+        for (Node follower : followers)
+            followersOfFollowers.addAll(graph.findFollowers(follower));
+
+        removeDuplicates(firstPerson, followers, followersOfFollowers);
+
+        System.out.println("Task 4: " + followersOfFollowers.size());
     }
         
 

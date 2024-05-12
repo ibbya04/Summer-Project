@@ -105,6 +105,8 @@ public class Node {
             return second;
     }
 
+    // Returns a Boolean value depending on if the test person follows the person
+    // the function is called on.
     public Boolean checkIfFollows(Node test) {
         for (Edge edge : edges) {
             Node n = edge.getEnd();

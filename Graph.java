@@ -145,6 +145,10 @@ public class Graph {
         return mostFollowing;
     }
 
+    // Finds followers of a person.
+    // Iterates through every person (node) in this graph
+    // If checkIfFollows is true, that person is added to the 
+    // test person's followers. 
     public Set<Node> findFollowers(Node testPerson) {
         Set<Node> followers = new HashSet<Node>();
 
