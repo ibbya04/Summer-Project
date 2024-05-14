@@ -158,6 +158,29 @@ public class Graph {
         }
         return followers;
     }
+
+    // populates follower array with each persons number of followers
+    // using a for loop, then returns followers array
+    public int[] initialiseFollowersArray(int[] followers) {
+        for (int i = 0; i < this.nodes.size(); i++) {
+            Node person = this.nodes.get(i); 
+            followers[i] = person.getFollowers();
+        }
+        return followers;
+    }
+
+    // returns finds median value
+    public int ifMedianisEven(int[] followers, int numberOfPeople) {
+        int median = 0;
+
+        if (numberOfPeople % 2 == 0)
+            // if number of people is even, takes both middle elements into calculation
+            median = (followers[numberOfPeople/2] + followers[(numberOfPeople/2) - 1]) / 2;
+        else 
+            median = followers[numberOfPeople/2];
+        return median;
+    }
+
     // testing
     public static void main(String[] args) {
         Graph socialNetwork = new Graph();

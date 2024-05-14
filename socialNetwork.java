@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -90,7 +91,22 @@ public class socialNetwork {
 
         System.out.println("Task 4: " + followersOfFollowers.size());
     }
-        
+    
+    // Returns median number of followers of all people in network
+    public void getMedianFollowers() {
+        // converts number of nodes (people) from float to int
+        // creates a new array of size number of people in network
+        int numberOfPeople = (int)graph.getNumNodes();
+        int[] followers = new int[numberOfPeople];
+
+        // populates each instance of the array with a person's number of followers
+        followers = graph.initialiseFollowersArray(followers);
+        Arrays.sort(followers);
+
+        // Calculates median value, deals with case if number of people is even
+        int median = graph.ifMedianisEven(followers, numberOfPeople);
+        System.out.println("Task 5: " + median);
+    }
 
     public static void main(String[] args) {
         String filePath = "test-socialnetworks/social-network1.txt";
@@ -106,6 +122,7 @@ public class socialNetwork {
         Dapper.mostFollowers();
         Dapper.mostFollowing();
         Dapper.twoDegreeesofSeparation();
+        Dapper.getMedianFollowers();
     }
 
     private static void usage() {
