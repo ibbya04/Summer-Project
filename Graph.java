@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 
 public class Graph {
@@ -80,14 +82,14 @@ public class Graph {
 
     // Returns number of edges, recursively calling getNodesEdges 
     // from Node.java for every node in this graph
-    public float getNumEdges() {
+    public int getNumEdges() {
         for (int i = 0; i < this.nodes.size(); i++)
             numEdges += this.nodes.get(i).getNodesEdges();
         return numEdges;
     }
 
     // Returns number of nodes in this graph
-    public float getNumNodes() {
+    public int getNumNodes() {
         return this.nodes.size();
     }
 
@@ -106,12 +108,12 @@ public class Graph {
         // gets each persons number of followers and if greater than
         // current person with most followers, update Node mostFollowers
         for (Node person: this.nodes) {
-            if (person.getFollowers() > mostFollowers.getFollowers()) {
+            if (person.getNumFollowers() > mostFollowers.getNumFollowers()) {
                 mostFollowers = person;
             }
 
             // if multiple people with same amount of followers, return first alphabetically
-            else if ( person.getFollowers() == mostFollowers.getFollowers()) {
+            else if ( person.getNumFollowers() == mostFollowers.getNumFollowers()) {
                 mostFollowers = person.returnFirstName(mostFollowers);
             }
         }
@@ -133,12 +135,12 @@ public class Graph {
         // gets number of people each persons follows and if greater than
         // current person with most following, update Node mostFollowing
         for (Node person: this.nodes) {
-            if (person.getFollowing() > mostFollowing.getFollowing()) {
+            if (person.getNumFollowing() > mostFollowing.getNumFollowing()) {
                 mostFollowing = person;
             }
 
             // if multiple people follow the same amount of people, return first alphabetically
-            else if ( person.getFollowing() == mostFollowing.getFollowing()) {
+            else if ( person.getNumFollowing() == mostFollowing.getNumFollowing()) {
                 mostFollowing = person.returnFirstName(mostFollowing);
             }
         }
@@ -164,7 +166,7 @@ public class Graph {
     public int[] initialiseFollowersArray(int[] followers) {
         for (int i = 0; i < this.nodes.size(); i++) {
             Node person = this.nodes.get(i); 
-            followers[i] = person.getFollowers();
+            followers[i] = person.getNumFollowers();
         }
         return followers;
     }
@@ -179,6 +181,37 @@ public class Graph {
         else 
             median = followers[numberOfPeople/2];
         return median;
+    }
+
+    public int calculateReach (Node testCase) {
+        // initialise recipients set and queue
+        Set<Node> recipients = new HashSet<>();
+        Queue<Node> queue = new LinkedList<>();
+
+        queue.add(testCase);
+
+        // BFS
+        // for every person in the queue,
+        // find their followers and add them to the queue
+        // if the follower ! already in set of recipients, add them
+        while(queue.size() > 0) {
+            // pop from the queue and make that person 'current'
+            // add person to recipients
+            Node current = queue.poll();
+            recipients.add(current);
+
+            // find current person's followers
+            Set<Node> followers = findFollowers(current);
+
+            // for each of their followers
+            // if follower not already in recipients add to queue 
+            for (Node follower : followers) {
+                if (!recipients.contains(follower))
+                    queue.add(follower);
+            }
+        }
+        int reach = recipients.size();
+        return reach;
     }
 
     // testing

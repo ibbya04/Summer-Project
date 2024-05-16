@@ -35,10 +35,10 @@ public class socialNetwork {
 
     // Calcultes density of the social network
     public void calculateDensity() {
-        float numEdges = graph.getNumEdges();
-        float numNodes = graph.getNumNodes();
+        int numEdges = graph.getNumEdges();
+        int numNodes = graph.getNumNodes();
 
-        float density = numEdges / (numNodes*(numNodes-1));
+        float density = (float) numEdges / (numNodes*(numNodes-1));
         System.out.println("Task 1: " + density);
     }
 
@@ -61,7 +61,7 @@ public class socialNetwork {
         String[] firstline = ir.formatLine(lines, 0);
         Node firstPerson = graph.findNode(firstline[0]);
         return firstPerson;
-        }
+    }
 
     // Removes the first person from the set followersOfFollowers
     // Removes any duplicates which are already followers of the first person.
@@ -96,7 +96,7 @@ public class socialNetwork {
     public void getMedianFollowers() {
         // converts number of nodes (people) from float to int
         // creates a new array of size number of people in network
-        int numberOfPeople = (int)graph.getNumNodes();
+        int numberOfPeople = graph.getNumNodes();
         int[] followers = new int[numberOfPeople];
 
         // populates each instance of the array with a person's number of followers
@@ -106,6 +106,14 @@ public class socialNetwork {
         // Calculates median value, deals with case if number of people is even
         int median = graph.ifMedianisEven(followers, numberOfPeople);
         System.out.println("Task 5: " + median);
+    }
+    
+    public void findBestMessagePropogater() {
+        Node firstPerson = getFirstPerson();
+
+        int reach = graph.calculateReach(firstPerson);
+
+        System.out.println(reach);
     }
 
     public static void main(String[] args) {
@@ -123,6 +131,7 @@ public class socialNetwork {
         Dapper.mostFollowing();
         Dapper.twoDegreeesofSeparation();
         Dapper.getMedianFollowers();
+        Dapper.findBestMessagePropogater();
     }
 
     private static void usage() {

@@ -6,6 +6,7 @@ public class Node {
     private ArrayList<Edge> edges;
     private int followers;
     private int following;
+    private int reach;
 
     // constructor
     public Node(String name) {
@@ -76,7 +77,7 @@ public class Node {
     }
 
     // Returns how many people node(person) is following
-    public int getFollowing() {
+    public int getNumFollowing() {
         return this.following;
     }
 
@@ -90,7 +91,7 @@ public class Node {
     }
 
     // Returns how many people followers node(person) has
-    public int getFollowers() {
+    public int getNumFollowers() {
         return this.followers;
     }
 
@@ -116,4 +117,7 @@ public class Node {
         return false; 
     }
 
+    public int getReach() {
+        return this.reach;
+    }
 }
