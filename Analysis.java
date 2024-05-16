@@ -3,14 +3,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class socialNetwork {
+public class Analysis {
 
     private Graph graph;
     private inputReader ir;
     private ArrayList<String> lines;
 
     // constructor to create graph
-    public socialNetwork(String filePath) {
+    public Analysis(String filePath) {
 
         this.lines = new ArrayList<String>();
         this.createGraph(filePath);
@@ -117,7 +117,7 @@ public class socialNetwork {
             return;
         }
 
-        socialNetwork Dapper = new socialNetwork(args[0]);
+        Analysis Dapper = new Analysis(args[0]);
         Dapper.calculateDensity();
         Dapper.mostFollowers();
         Dapper.mostFollowing();
@@ -127,6 +127,6 @@ public class socialNetwork {
     }
 
     private static void usage() {
-        System.out.println("Usage: java socialNetwork <file.txt>");
+        System.out.println("Usage: java Analysis <file.txt>");
     }
 }
