@@ -120,4 +120,8 @@ public class Node {
     public int getReach() {
         return this.reach;
     }
+
+    public void setReach(int reach) {
+        this.reach = reach;
+    }
 }

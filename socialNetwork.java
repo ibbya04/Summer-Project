@@ -92,7 +92,7 @@ public class socialNetwork {
         System.out.println("Task 4: " + followersOfFollowers.size());
     }
     
-    // Returns median number of followers of all people in network
+    // Returns median number of followers of all people in network - Task 5
     public void getMedianFollowers() {
         // converts number of nodes (people) from float to int
         // creates a new array of size number of people in network
@@ -108,16 +108,15 @@ public class socialNetwork {
         System.out.println("Task 5: " + median);
     }
     
+    // Find best person to spread a message - Task 6
     public void findBestMessagePropogater() {
-        Node firstPerson = getFirstPerson();
+        Node highestReach = graph.findHighestReach();
 
-        int reach = graph.calculateReach(firstPerson);
-
-        System.out.println(reach);
+        System.out.println("Task 6: "+ highestReach.getName());
     }
 
     public static void main(String[] args) {
-        String filePath = "test-socialnetworks/social-network1.txt";
+        String filePath = "test-socialnetworks/social-network2.txt";
 
         // Check if command line argument has more than one argument
         // if (args.length != 1) {

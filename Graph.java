@@ -183,7 +183,8 @@ public class Graph {
         return median;
     }
 
-    public int calculateReach (Node testCase) {
+    // Find a single persons reach, the number of people the message will spread to.
+    public void findReach (Node testCase) {
         // initialise recipients set and queue
         Set<Node> recipients = new HashSet<>();
         Queue<Node> queue = new LinkedList<>();
@@ -210,8 +211,23 @@ public class Graph {
                     queue.add(follower);
             }
         }
-        int reach = recipients.size();
-        return reach;
+
+        // For this person we calculated the lsit of recipients for,
+        // i.e the number of people the message will spread to,
+        // set their reach to this
+        testCase.setReach(recipients.size());
+    }
+
+    public Node findHighestReach() {
+        // initialise person with highest reach
+        Node highestReach = this.nodes.get(0);
+
+        for (Node person : this.nodes) {
+            findReach(person);
+            if (person.getReach() > highestReach.getReach())
+                highestReach = person;
+        }
+        return highestReach;
     }
 
     // testing
