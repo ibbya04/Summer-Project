@@ -5,14 +5,15 @@ import java.io.FileNotFoundException;
 
 public class inputReader {
 
-  // Reads a line of text from a file and converts into an array of strings
-  public ArrayList<String> readLine(String filePath) {
+  // Reads all the text from a file and adds it to the ArrayList lines 
+  public ArrayList<String> readLines(String filePath) {
     ArrayList<String> lines = new ArrayList<>();
 
-    // if there is another line of text, scanner scans over it and returns it into
-    // data variable
+    // if there is another line of text, scanner scans over it and adds it to lines ArrayList
+    // catches exception from scanner
     try {
       Scanner scanner = new Scanner(new File(filePath));
+
       while (scanner.hasNextLine()) {
         String line = scanner.nextLine();
         lines.add(line);
@@ -29,12 +30,5 @@ public class inputReader {
   public String[] formatLine(ArrayList<String> data, int i) {
     String[] names = data.get(i).split(" ");
     return names;
-  }
-
-  // testing
-  public static void main(String[] args) {
-    inputReader ir = new inputReader();
-    ArrayList<String> data = ir.readLine("test-socialnetworks/social-network1.txt");
-    System.out.println(data);
   }
 }

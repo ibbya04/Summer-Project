@@ -14,9 +14,6 @@ public class socialNetwork {
 
         this.lines = new ArrayList<String>();
         this.createGraph(filePath);
-
-        //testing
-        graph.printGraph();
     }
 
     // creates a graph by calling readLine function to get line of text
@@ -25,7 +22,7 @@ public class socialNetwork {
         ir = new inputReader();
         graph = new Graph();
 
-        lines = ir.readLine(filePath);
+        lines = ir.readLines(filePath);
 
         for (int i = 0; i < lines.size(); i++) {
             String[] names = ir.formatLine(lines, i);
@@ -33,7 +30,7 @@ public class socialNetwork {
         }
     }
 
-    // Calcultes density of the social network
+    // Calculates the density of the graph - Task 1
     public void calculateDensity() {
         int numEdges = graph.getNumEdges();
         int numNodes = graph.getNumNodes();
@@ -42,13 +39,13 @@ public class socialNetwork {
         System.out.println("Task 1: " + density);
     }
 
-    // Calls checkNumberofFollowers and prints result
+    // Calls findHighestFollowers and prints the result - Task 2
     public void mostFollowers() {
         Node mostFollowers = graph.findHighestFollowers();
         System.out.println("Task 2: " + mostFollowers.getName());
     }
 
-    // Calls checkNumberofFollowing and prints result
+    // Calls findHighestFollowing and prints the result - Task 3
     public void mostFollowing() {
         Node mostFollowing = graph.findHighestFollowing();
         System.out.println("Task 3: " + mostFollowing.getName());
@@ -56,7 +53,7 @@ public class socialNetwork {
 
     // Returns the first person who appears in the input
     // Uses formatLine function from inputReader to get a string array of all the names on the first line
-    // Finds the node of the first person on that line and returns that node. 
+    // Returns the node of the first person on that line 
     public Node getFirstPerson() {
         String[] firstline = ir.formatLine(lines, 0);
         Node firstPerson = graph.findNode(firstline[0]);
@@ -73,16 +70,15 @@ public class socialNetwork {
         return followersOfFollowers;
     }
 
-    // Returns number of people at two degrees of separation.
-    // Calls getFirstPerson to get the first person from the input.
-    // Both groups of followers are put into Sets, no duplicates, unordered.
-    // The set of followers of the first person is found by calling findFollowers.
-    // Then it iterates through each of these followers adding their followers
-    // to the set followersOfFollowers. Then duplicates are removed.
+    // Returns number of people at two degrees of separation from the first person.
+    // Uses sets, no duplicates, unordered - Task 4
     public void twoDegreeesofSeparation() {
+        // gets the first person from the input and adds their followers to a set
         Node firstPerson = getFirstPerson();
         Set<Node> followers = graph.findFollowers(firstPerson);
 
+        // iterates through each of these followers adding all of the follower's, follower's
+        // to the set followersOfFollowers. Removes duplicates then prints result.
         Set<Node> followersOfFollowers = new HashSet<Node>();
         for (Node follower : followers)
             followersOfFollowers.addAll(graph.findFollowers(follower));
@@ -92,23 +88,22 @@ public class socialNetwork {
         System.out.println("Task 4: " + followersOfFollowers.size());
     }
     
-    // Returns median number of followers of all people in network - Task 5
+    // Finds the median value for the number of followers in the network - Task 5
     public void getMedianFollowers() {
-        // converts number of nodes (people) from float to int
-        // creates a new array of size number of people in network
+        // Finds the number of people in this network
+        // creates a new array of size, number of people in this network
         int numberOfPeople = graph.getNumNodes();
-        int[] followers = new int[numberOfPeople];
+        int[] numFollowers = new int[numberOfPeople];
 
-        // populates each instance of the array with a person's number of followers
-        followers = graph.initialiseFollowersArray(followers);
-        Arrays.sort(followers);
+        // populates each instance of the array with each person's number of followers
+        numFollowers = graph.initialiseFollowersArray(numFollowers);
+        Arrays.sort(numFollowers);
 
-        // Calculates median value, deals with case if number of people is even
-        int median = graph.ifMedianisEven(followers, numberOfPeople);
-        System.out.println("Task 5: " + median);
+        // Calculates median value, deals with case if number of people is even and prints
+        System.out.println("Task 5: " + graph.calculateMedian(numFollowers, numberOfPeople));
     }
     
-    // Find best person to spread a message - Task 6
+    // Finds best person to spread a message - Task 6
     public void findBestMessagePropogater() {
         Node highestReach = graph.findHighestReach();
 
@@ -116,15 +111,13 @@ public class socialNetwork {
     }
 
     public static void main(String[] args) {
-        String filePath = "test-socialnetworks/social-network2.txt";
-
         // Check if command line argument has more than one argument
-        // if (args.length != 1) {
-        //     usage();
-        //     return;
-        // }
+        if (args.length != 1) {
+            usage();
+            return;
+        }
 
-        socialNetwork Dapper = new socialNetwork(filePath);
+        socialNetwork Dapper = new socialNetwork(args[0]);
         Dapper.calculateDensity();
         Dapper.mostFollowers();
         Dapper.mostFollowing();

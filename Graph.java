@@ -9,12 +9,13 @@ public class Graph {
     private ArrayList<Node> nodes;
     private int numEdges;
 
+    // constructor
     public Graph() {
         this.nodes = new ArrayList<Node>();
     }
 
     // Adds a node to the ArrayList of nodes.
-    // Calls findNode to check if node is already in ArrayList, if not it creates
+    // checks if node is already in ArrayList, if not it creates
     // the node using ArrayList add funciton.
     // If node is in the array list already, the node is returned by calling
     // findNode again.
@@ -27,7 +28,7 @@ public class Graph {
             return findNode(name);
     }
 
-    // Removes a node from the aray list
+    // Removes a node from the array list
     public void removeNode(Node node) {
         this.nodes.remove(node);
     }
@@ -44,8 +45,8 @@ public class Graph {
         startNode.removeEdge(endNode);
     }
 
-    // checks if a node is in the array list of nodes, using the node's name.
-    // Returns null if node is not found
+    // checks if a node is in the array list of nodes, using the node's name
+    // Returns null if node is not found, else returns node
     public Node findNode(String name) {
         for (int i = 0; i < this.nodes.size(); i++) {
             Node node = this.nodes.get(i);
@@ -55,24 +56,22 @@ public class Graph {
         return null;
     }
 
-    // iterates over all graphs nodes, assinging each node to n and calling print
-    // function on each node
+    // iterates over all graphs nodes, printing each node and its edges
     public void printGraph() {
-        for (Node n : this.nodes) {
-            n.printNodes();
-        }
+        for (Node n : this.nodes)
+            n.printNode();
     }
 
-    // Creates a node for every person from an array of names
+    // Creates a node for every person from an array of names (single line from input file)
     public void createPeople(String[] names) {
-        // for each loop creating a node for every name within data array
+        // for each loop creating a node for every name within array
         for (String person : names)
             this.addNode(person);
 
-        // for loop iterating through the single row of names we gave it
-        // start node is always first name on the row of data
-        // iterates through all other names creating a directed edge between first name
-        // and nth name.
+        // iterates through the array of names,  
+        // start node is always first name in the array
+        // iterates through all other names creating a directed edge 
+        // between first name and nth name.
         for (int i = 1; i < names.length; i++) {
             Node startNode = findNode(names[0]);
             Node endNode = findNode(names[i]);
@@ -80,8 +79,9 @@ public class Graph {
         }
     }
 
-    // Returns number of edges, recursively calling getNodesEdges 
-    // from Node.java for every node in this graph
+    // Returns number of edges in this graph.
+    // calls getNodesEdges to get number of edges 
+    // for every node in this graph
     public int getNumEdges() {
         for (int i = 0; i < this.nodes.size(); i++)
             numEdges += this.nodes.get(i).getNodesEdges();
@@ -93,13 +93,11 @@ public class Graph {
         return this.nodes.size();
     }
 
-    // Checks each persons number of followers
-    // Calls checkFollowers on each person using a for each loop, 
-    // updating everyones follower count
+    // Finds the person who has the most followers
     public Node findHighestFollowers() {
-        for (Node person : this.nodes) {
-            person.checkFollowers();
-        }
+        // updates every persons followers count
+        for (Node person : this.nodes) 
+            person.updateFollowers();
 
         // initialises person (node) with most followers to first node
         Node mostFollowers = this.nodes.get(0);
@@ -107,26 +105,22 @@ public class Graph {
         // for each loop iterates through all nodes (all people)
         // gets each persons number of followers and if greater than
         // current person with most followers, update Node mostFollowers
-        for (Node person: this.nodes) {
-            if (person.getNumFollowers() > mostFollowers.getNumFollowers()) {
+        for (Node person : this.nodes) {
+            if (person.getNumFollowers() > mostFollowers.getNumFollowers())
                 mostFollowers = person;
-            }
 
             // if multiple people with same amount of followers, return first alphabetically
-            else if ( person.getNumFollowers() == mostFollowers.getNumFollowers()) {
+            else if (person.getNumFollowers() == mostFollowers.getNumFollowers())
                 mostFollowers = person.returnFirstName(mostFollowers);
-            }
         }
         return mostFollowers;
     }
 
-    // Checks number of people each person follows
-    // Calls checkFollowing on each person using a for each loop, 
-    // updating everyones following count
+    // Finds the person who follows the most people
     public Node findHighestFollowing() {
-        for (Node person : this.nodes) {
-            person.checkFollowing();
-        }
+        // updates every person following count
+        for (Node person : this.nodes) 
+            person.updateFollowing();
 
         // initialises person (node) following most poeple to first node
         Node mostFollowing = this.nodes.get(0);
@@ -134,25 +128,22 @@ public class Graph {
         // for each loop iterates through all nodes (all people)
         // gets number of people each persons follows and if greater than
         // current person with most following, update Node mostFollowing
-        for (Node person: this.nodes) {
-            if (person.getNumFollowing() > mostFollowing.getNumFollowing()) {
+        for (Node person : this.nodes) {
+            if (person.getNumFollowing() > mostFollowing.getNumFollowing()) 
                 mostFollowing = person;
-            }
 
             // if multiple people follow the same amount of people, return first alphabetically
-            else if ( person.getNumFollowing() == mostFollowing.getNumFollowing()) {
+            else if (person.getNumFollowing() == mostFollowing.getNumFollowing())
                 mostFollowing = person.returnFirstName(mostFollowing);
-            }
         }
         return mostFollowing;
     }
 
-    // Finds followers of a person.
+    // Finds followers of the person passed as a parameter.
     // Iterates through every person (node) in this graph
-    // If checkIfFollows is true, that person is added to the 
-    // test person's followers. 
+    // if person follows testPerson, the person is added to the set. 
     public Set<Node> findFollowers(Node testPerson) {
-        Set<Node> followers = new HashSet<Node>();
+        Set<Node> followers = new HashSet<>();
 
         for (Node person : this.nodes) {
             if (person.checkIfFollows(testPerson) == true)
@@ -161,8 +152,8 @@ public class Graph {
         return followers;
     }
 
-    // populates follower array with each persons number of followers
-    // using a for loop, then returns followers array
+    // populates follower array with each person's number of followers
+    // using a for loop, then returns the array
     public int[] initialiseFollowersArray(int[] followers) {
         for (int i = 0; i < this.nodes.size(); i++) {
             Node person = this.nodes.get(i); 
@@ -171,19 +162,19 @@ public class Graph {
         return followers;
     }
 
-    // returns finds median value
-    public int ifMedianisEven(int[] followers, int numberOfPeople) {
+    // finds the median value from
+    public int calculateMedian(int[] numFollowers, int numberOfPeople) {
         int median = 0;
 
         if (numberOfPeople % 2 == 0)
             // if number of people is even, takes both middle elements into calculation
-            median = (followers[numberOfPeople/2] + followers[(numberOfPeople/2) - 1]) / 2;
+            median = (numFollowers[numberOfPeople/2] + numFollowers[(numberOfPeople/2) - 1]) / 2;
         else 
-            median = followers[numberOfPeople/2];
+            median = numFollowers[numberOfPeople/2];
         return median;
     }
 
-    // Find a single persons reach, the number of people the message will spread to.
+    // Finds a single persons reach, the number of people the message will spread to.
     public void findReach (Node testCase) {
         // initialise recipients set and queue
         Set<Node> recipients = new HashSet<>();
@@ -214,34 +205,24 @@ public class Graph {
 
         // For this person we calculated the lsit of recipients for,
         // i.e the number of people the message will spread to,
-        // set their reach to this
+        // set their reach to the size of the set
         testCase.setReach(recipients.size());
     }
 
+    // Finds person with largest reach
     public Node findHighestReach() {
         // initialise person with highest reach
         Node highestReach = this.nodes.get(0);
 
+        // iterates through each person, checking if their reach is >
+        // returns alphabetically first name if both have same reach
         for (Node person : this.nodes) {
             findReach(person);
             if (person.getReach() > highestReach.getReach())
                 highestReach = person;
+            else if (person.getReach() == highestReach.getReach())
+                highestReach = person.returnFirstName(highestReach);
         }
         return highestReach;
-    }
-
-    // testing
-    public static void main(String[] args) {
-        Graph socialNetwork = new Graph();
-        Node Ibraheem = socialNetwork.addNode("ibraheem");
-        Node Ibby = socialNetwork.addNode("ibby");
-        Node IA = socialNetwork.addNode("IA");
-
-        socialNetwork.addEdge(Ibby, Ibraheem);
-        socialNetwork.addEdge(IA, Ibraheem);
-        socialNetwork.addEdge(IA, Ibby);
-        socialNetwork.printGraph();
-
-        Set<Node> followers = socialNetwork.findFollowers(Ibraheem);
     }
 }
