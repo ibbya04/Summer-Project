@@ -36,19 +36,19 @@ public class Analysis {
         int numNodes = graph.getNumNodes();
 
         float density = (float) numEdges / (numNodes*(numNodes-1));
-        System.out.println("Task 1: " + density);
+        System.out.println("Task 1: The density of the graph is " + density);
     }
 
     // Calls findHighestFollowers and prints the result - Task 2
     public void mostFollowers() {
         Node mostFollowers = graph.findHighestFollowers();
-        System.out.println("Task 2: " + mostFollowers.getName());
+        System.out.println("Task 2: The person with the highest number of followers is " + mostFollowers.getName());
     }
 
     // Calls findHighestFollowing and prints the result - Task 3
     public void mostFollowing() {
         Node mostFollowing = graph.findHighestFollowing();
-        System.out.println("Task 3: " + mostFollowing.getName());
+        System.out.println("Task 3: The person who is following the most people is " + mostFollowing.getName());
     }
 
     // Returns the first person who appears in the input
@@ -85,7 +85,7 @@ public class Analysis {
 
         removeDuplicates(firstPerson, followers, followersOfFollowers);
 
-        System.out.println("Task 4: " + followersOfFollowers.size());
+        System.out.println("Task 4: The number of people at two degrees of separation from the first person is " + followersOfFollowers.size());
     }
     
     // Finds the median value for the number of followers in the network - Task 5
@@ -100,14 +100,14 @@ public class Analysis {
         Arrays.sort(numFollowers);
 
         // Calculates median value, deals with case if number of people is even and prints
-        System.out.println("Task 5: " + graph.calculateMedian(numFollowers, numberOfPeople));
+        System.out.println("Task 5: The median value for the number of followers is " + graph.calculateMedian(numFollowers, numberOfPeople));
     }
     
     // Finds best person to spread a message - Task 6
     public void findBestMessagePropogater() {
         Node highestReach = graph.findHighestReach();
 
-        System.out.println("Task 6: "+ highestReach.getName());
+        System.out.println("Task 6: The person who can spread a information the furthest is "+ highestReach.getName());
     }
 
     public static void main(String[] args) {
