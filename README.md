@@ -15,5 +15,6 @@ My project contains 5 classes;
   InputReader.java - Parses input text and turns each line into an array of strings.
 
 # Usage
-
+```text
 java Analysis <filename>
+```
