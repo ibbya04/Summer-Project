@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
-public class inputReader {
+public class InputReader {
 
   // Reads all the text from a file and adds it to the ArrayList lines 
   public ArrayList<String> readLines(String filePath) {

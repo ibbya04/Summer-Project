@@ -6,7 +6,7 @@ import java.util.Set;
 public class Analysis {
 
     private Graph graph;
-    private inputReader ir;
+    private InputReader ir;
     private ArrayList<String> lines;
 
     // constructor to create graph
@@ -19,7 +19,7 @@ public class Analysis {
     // creates a graph by calling readLine function to get line of text
     // then createPerson function creates nodes & edges for that line of people/ 
     public void createGraph(String filePath) {
-        ir = new inputReader();
+        ir = new InputReader();
         graph = new Graph();
 
         lines = ir.readLines(filePath);
