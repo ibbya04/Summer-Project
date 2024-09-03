@@ -2,6 +2,9 @@
 
 For my first year summer project, I chose project number 2 - Social Networks.
 
+Specification: [summer-project-spec.pdf](https://github.com/user-attachments/files/16856837/summer-project-spec.pdf)
+
+
 My project contains 5 classes;
 
   Analysis.java - Uses methods from Graph.java to solve each task and print the output. The constructor creates the graph.
